@@ -36,7 +36,24 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/productos');
+        //Validar datos
+        $request->validate([
+            'nombre'=>'required|string|min:5|max:255',
+            'precio'=>'required|numeric|min:1',
+            //'especie'=>'string',
+            'fechaIngreso'=>'required|date',
+            'existencia'=>'required|numeric',
+        ]);
+
+        $request->merge([
+            'especie'=> $request->especie ?? ''
+        ]);
+
+        //Guardar en BD
+        Producto::create($request->all());
+        //Adentro se puede poner cada atributo para guardarlo
+
+        return redirect('/producto');
     }
 
     /**
@@ -58,7 +75,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        return view('productos/productoForm', compact('producto'));
     }
 
     /**

@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             $table->string('especie');
             $table->float('precio',7,2);
-            $table->date('feachaIngreso');
+            $table->date('fechaIngreso');
             $table->integer('existencia');
             $table->timestamps();
         });
