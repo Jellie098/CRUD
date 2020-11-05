@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Información de un producto</h1>
-    <a href="/productos/create">Agregar producto</a>
+    <a href="/producto/create">Agregar producto</a>
     <table>
         <tr>
             <th>ID</th>

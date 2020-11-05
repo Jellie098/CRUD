@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/bienvenida', function ($nombre, $apellido = null) {
-    return view('bienvenida');
-});
-
 //Listado de productos
 //Route::get('/producto', [ProductoController::class, 'index']);
 //Route::get('/producto/create', [ProductoController::class, 'create']);

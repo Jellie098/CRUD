@@ -25,7 +25,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('producto/productoForm');
+        return view('productos/productoForm');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/producto');
+        return redirect('/productos');
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        return view('producto/productoShow', compact('producto'));
+        return view('productos/productoShow', compact('producto'));
     }
 
     /**
