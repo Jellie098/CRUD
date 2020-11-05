@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/bienvenida', function ($nombre, $apellido = null) {
+    return view('bienvenida');
+});
+
 //Listado de productos
-Route::get('/productos', [ProductosController::class, 'index']);
-Route::get('/productos/create', [ProductosController::class, 'create']);
+//Route::get('/producto', [ProductoController::class, 'index']);
+//Route::get('/producto/create', [ProductoController::class, 'create']);
+//Route::get('/producto/{producto}', [ProductoController::class, 'show']);
+Route::resource('producto',ProductoController::class);
