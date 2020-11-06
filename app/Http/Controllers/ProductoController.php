@@ -40,7 +40,6 @@ class ProductoController extends Controller
         $request->validate([
             'nombre'=>'required|string|min:5|max:255',
             'precio'=>'required|numeric|min:1',
-            //'especie'=>'string',
             'fechaIngreso'=>'required|date',
             'existencia'=>'required|numeric',
         ]);
@@ -87,7 +86,16 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        $request->validate([
+            'nombre'=>'required|string|min:5|max:255',
+            'precio'=>'required|numeric|min:1',
+            'fechaIngreso'=>'required|date',
+            'existencia'=>'required|numeric',
+        ]);
+
+        Producto::where('id', $producto->id)->update($request->except('_method', '_token'));
+
+        return redirect()->route('producto.show', [$producto]); 
     }
 
     /**

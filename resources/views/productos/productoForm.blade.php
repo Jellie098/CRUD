@@ -18,31 +18,28 @@
         //Es un input oculto-->
         @csrf
         <label for="nombre">Nombre del producto:</label>
-        <input type="text" name="nombre" value="{{ old('nombre')}}{{ $producto->nombre}}"><br><br>
+        <input type="text" name="nombre" value="{{ old('nombre') ?? $producto->nombre ?? ''}}"><br><br>
         @error('nombre')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <label for="precio">Precio:</label>
-        <input type="number" min="1" step="0.50" name="precio" value="{{ old('precio')}}{{ $producto->precio}}"><br><br>
+        <input type="number" min="1" step="0.50" name="precio" value="{{ old('precio') ?? $producto->precio ?? ''}}"><br><br>
         @error('precio')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <label for="especie">Familia o especie:</label>
-        <input type="text" name="especie" value="{{ old('especie')}}{{ $producto->especie}}"><br><br>
-        @error('especie')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        <input type="text" name="especie" value="{{ old('especie') ?? $producto->especie ?? ''}}"><br><br>
 
         <label for="fechaIngreso">Ingreso de planta:</label>
-        <input type="date" name="fechaIngreso" value="{{ old('fechaIngreso')}}{{ $producto->fechaIngreso}}"><br><br>
+        <input type="date" name="fechaIngreso" value="{{ old('fechaIngreso') ?? $producto->fechaIngreso ?? ''}}"><br><br>
         @error('fechaIngreso')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <label for="existencia">Cantidad en existencia:</label>
-        <input name="existencia" value="{{ old('existencia')}}{{ $producto->existencia}}"><br><br>
+        <input name="existencia" value="{{ old('existencia') ?? $producto->existencia ?? ''}}"><br><br>
         @error('existencia')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
