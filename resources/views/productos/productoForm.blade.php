@@ -1,50 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-</head>
-<body>
-    <h1>Agregar nuevo producto del vivero</h1>
+@extends('layouts.app')
 
-@if(isset($producto))
-    <form action="{{ route('producto.update', [$producto]) }}" method="POST">
-    @method('patch')
-@else
-    <form action="{{ route('producto.store') }}" method="POST"> 
-@endif  
-        <!--Se agrega a todos los formularios que tienen el método POST
-        //Es un input oculto-->
-        @csrf
-        <label for="nombre">Nombre del producto:</label>
-        <input type="text" name="nombre" value="{{ old('nombre') ?? $producto->nombre ?? ''}}"><br><br>
-        @error('nombre')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+@section('contenido')
 
-        <label for="precio">Precio:</label>
-        <input type="number" min="1" step="0.50" name="precio" value="{{ old('precio') ?? $producto->precio ?? ''}}"><br><br>
-        @error('precio')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h3>Agregar un nuevo producto</h3>
+            </div>    
+            <div class="ibox-content">
+                @if(isset($producto))
+                    <form action="{{ route('producto.update', [$producto]) }}" method="POST">
+                    @method('patch')
+                @else
+                    <form action="{{ route('producto.store') }}" method="POST"> 
+                @endif  
+                    <!--Se agrega a todos los formularios que tienen el método POST
+                    //Es un input oculto-->
+                    @csrf
+                    <div class="form-group">
+                        <label for="nombre" class="col-sm-2 control-label">Nombre del producto</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nombre" class="form-control" value="{{ old('nombre') ?? $producto->nombre ?? ''}}"><br><br>
+                        </div>
 
-        <label for="especie">Familia o especie:</label>
-        <input type="text" name="especie" value="{{ old('especie') ?? $producto->especie ?? ''}}"><br><br>
+                        <label for="precio" class="col-sm-2 control-label">Precio</label>
+                        <div class="col-sm-10">    
+                            <input type="number" min="1" step="0.50" name="precio" class="form-control" value="{{ old('precio') ?? $producto->precio ?? ''}}"><br><br>
+                        </div>
 
-        <label for="fechaIngreso">Ingreso de planta:</label>
-        <input type="date" name="fechaIngreso" value="{{ old('fechaIngreso') ?? $producto->fechaIngreso ?? ''}}"><br><br>
-        @error('fechaIngreso')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+                        <label for="especie" class="col-sm-2 control-label">Familia o especie</label>
+                        <div class="col-sm-10">     
+                            <input type="text" name="especie" class="form-control" value="{{ old('especie') ?? $producto->especie ?? ''}}"><br><br>
+                        </div>
 
-        <label for="existencia">Cantidad en existencia:</label>
-        <input name="existencia" value="{{ old('existencia') ?? $producto->existencia ?? ''}}"><br><br>
-        @error('existencia')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+                        <label for="fechaIngreso" class="col-sm-2 control-label">Ingreso de planta</label>
+                        <div class="col-sm-10">  
+                            <input type="date" name="fechaIngreso" class="form-control" value="{{ old('fechaIngreso') ?? $producto->fechaIngreso ?? ''}}"><br><br>
+                        </div>
 
-        <button type="submit">Agregar</button>
-    </form>
-</body>
-</html>
+                        <label for="existencia" class="col-sm-2 control-label">Cantidad en existencia</label>
+                        <div class="col-sm-10">  
+                            <input name="existencia" class="form-control" value="{{ old('existencia') ?? $producto->existencia ?? ''}}"><br><br>
+                        </div>
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                    </div>
+                    <a href="{{ route('producto.index') }}" class="btn btn-outline btn-default">Cancelar</a>
+                    <button type="submit" class="btn btn-outline btn-primary">Agregar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+@endsection

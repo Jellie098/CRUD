@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/inicio', function () {
+    return view('inicio');
+});
+
 //Listado de productos
 //Route::get('/producto', [ProductoController::class, 'index']);
 //Route::get('/producto/create', [ProductoController::class, 'create']);
