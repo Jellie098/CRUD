@@ -9,9 +9,7 @@
                     <h2>Bienvenido al sistema del vivero</h2>
                     <br><br><br><br><br><br><br><br><br>
                 </div>    
-                
             </div>    
-
         </div>
 </div>
 
