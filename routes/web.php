@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/inicio', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function () {
     return view('inicio');
-});
+})->name('inicio');;
 
 //Listado de productos
 //Route::get('/producto', [ProductoController::class, 'index']);
