@@ -25,4 +25,7 @@ Route::get('/inicio', function () {
 //Route::get('/producto', [ProductoController::class, 'index']);
 //Route::get('/producto/create', [ProductoController::class, 'create']);
 //Route::get('/producto/{producto}', [ProductoController::class, 'show']);
-Route::resource('producto',ProductoController::class);
+Route::resource('producto',ProductoController::class)->middleware(['auth:sanctum']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
