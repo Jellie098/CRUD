@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.producto')
 
 @section('contenido')
     <a href="/producto/create" class="btn btn-outline btn-info"> Agregar producto </a>

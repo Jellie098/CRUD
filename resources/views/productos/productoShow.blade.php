@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.producto')
 
 @section('contenido')
     <div class="wrapper wrapper-content animated fadeInRight">
