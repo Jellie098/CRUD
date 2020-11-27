@@ -19,15 +19,14 @@
 <body class="">
 
 <div id="wrapper">
-
-    <nav class="navbar-default navbar-static-side" role="navigation">
+    <!--<nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             @include('layouts.menuLateral')
         </div>
-    </nav>
+    </nav>-->
     <div id="page-wrapper" class="gray-bg">
         @include('layouts.barraSuperior')
-        <!--@include('layouts.subMenu')-->
+        @include('layouts.subMenu')
         <div class="wrapper wrapper-content">
             @yield('contenido')
         </div>
