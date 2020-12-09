@@ -1,48 +1,76 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<html>
 
-        <x-jet-validation-errors class="mb-4" />
+<head>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cactiplace | Login</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-8">
+            <img src="{{ asset('img/idea1.png') }}">
             </div>
-        @endif
+            <div class="col-md-4">
+                <div class="ibox-content">
+                    <form class="m-t" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="email">{{ __('Email') }}</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{old('email')}}" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">{{ __('Password') }}</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b"> {{ __('Login') }}</button>
+                        
+                        <div>
+                            <label> <input type="checkbox" class="i-checks"> {{ __('Remember me') }}</label>
+                        </div>
+                        <br>
+                        <div class="text-muted text-center">
+                        @if (Route::has('password.request'))
+                            <a lass="text-muted text-center"class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                        </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                        <br><br>
+                        <p class="text-muted text-center">
+                            <small>Not a member?</small>
+                        </p>
 
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                        <br>
+                        <a class="btn btn-block btn-outline btn-success" href="{{ route('register') }}">Create an account</a>
+                    </form>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                
             </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+            <div class="col-md-6 text-right">
+               <small>© 2020</small>
             </div>
+        </div>
+    </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+</body>
 
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+</html>

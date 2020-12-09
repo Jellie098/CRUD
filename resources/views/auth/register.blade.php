@@ -1,43 +1,71 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<html>
 
-        <x-jet-validation-errors class="mb-4" />
+<head>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+    <title>Registro</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h3 class="m-t-none m-b">Regístrate </h3>
+            </div>
+            <div class="ibox-content">
+                <form class="m-t" method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name" >{{ __('Name') }}</label>
+                        <input type="text" id="name" class="form-control" name="name" placeholder="Enter name" value="{{ old('name') }}" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{{ __('Email') }}</label>
+                        <input type="email" id="email" class="form-control" name="email" placeholder="Enter email" value="{{ old('email') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">{{ __('Password') }}</label>
+                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                        <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
+                    </div>
+                    <div class="form-group">
+                            <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">{{ __('Register') }}</button>
+                </form>
+                <a class="btn btn-block btn-outline btn-info" href="{{ route('login') }}"> {{ __('Already registered?') }}</a>
             </div>
 
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+        </div>  
+    </div>
 
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
 
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+</body>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+</html>
