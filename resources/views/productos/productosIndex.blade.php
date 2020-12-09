@@ -3,7 +3,7 @@
 @section('contenido')
     
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="col-sm-8">
+        <div class="col-sm-10">
             <div class="ibox float-e-margins">  
                 <div class="ibox-content">
                     <table class="table table-striped">
@@ -25,7 +25,7 @@
                 </div>       
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <a href="/producto/create" class="btn btn-outline btn-info"> Agregar producto </a>
         </div>
     </div>

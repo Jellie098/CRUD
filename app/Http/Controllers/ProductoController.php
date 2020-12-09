@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tipo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos/productoForm');
+        $tipos = Tipo::all();
+
+        return view('productos/productoForm', compact('tipos'));
     }
 
     /**
@@ -36,18 +39,20 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->tipo_id);
         //Validar datos
         $request->validate([
             'nombre'=>'required|string|min:5|max:255',
             'precio'=>'required|numeric|min:1',
             'fechaIngreso'=>'required|date',
-            'existencia'=>'required|numeric',
         ]);
 
         $request->merge([
-            'especie'=> $request->especie ?? ''
+            'especie'=> $request->especie ?? '',
+            'tipo_id' => $request->tipo_id
         ]);
 
+        //dd($request->tipo_id);
         //Guardar en BD
         Producto::create($request->all());
         //Adentro se puede poner cada atributo para guardarlo
@@ -90,7 +95,6 @@ class ProductoController extends Controller
             'nombre'=>'required|string|min:5|max:255',
             'precio'=>'required|numeric|min:1',
             'fechaIngreso'=>'required|date',
-            'existencia'=>'required|numeric',
         ]);
 
         Producto::where('id', $producto->id)->update($request->except('_method', '_token'));

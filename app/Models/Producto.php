@@ -9,6 +9,11 @@ class Producto extends Model
 {
     use HasFactory;
     protected $table = "productos";
-    protected $fillable = ['nombre', 'precio', 'especie', 'fechaIngreso', 'existencia'];
+    protected $fillable = ['nombre', 'tipo_id', 'precio', 'especie', 'fechaIngreso'];
     
+    public function Tipo()
+    {
+        return $this->belongsTo(Tipo::Class);
+    }
+
 }

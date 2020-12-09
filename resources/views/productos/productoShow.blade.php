@@ -14,15 +14,15 @@
                             <th>Producto</th>
                             <th>Familia</th>
                             <th>Precio</th>
-                            <th>En existencia</th>
+                            <th>Cantidad de sol</th>
                         </tr>
                     </thead>
                     <tr>
                         <td>{{$producto->id}}</td>
                         <td>{{$producto->nombre}}</td>
                         <td>{{$producto->especie}}</td>
-                        <td>$ {{$producto->precio}}</td>
-                        <td>{{$producto->existencia}}</td>
+                        <td>${{$producto->precio}}</td>
+                        <td>{{$producto->tipo->tipo}}</td>
                     </tr>
                 </table>
                 <div class="hr-line-dashed"></div>

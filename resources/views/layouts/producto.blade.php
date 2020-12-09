@@ -16,15 +16,10 @@
 
     </head>
 
-<body class="">
+<body class="gray-bg">
 
-<div id="wrapper">
-    <!--<nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            @include('layouts.menuLateral')
-        </div>
-    </nav>-->
-    <div id="page-wrapper" class="gray-bg">
+<div >
+    <div class="gray-bg">
         @include('layouts.barraSuperior')
         @include('layouts.subMenu')
         <div class="wrapper wrapper-content">

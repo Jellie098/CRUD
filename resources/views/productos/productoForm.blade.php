@@ -38,9 +38,13 @@
                             <input type="date" name="fechaIngreso" class="form-control" value="{{ old('fechaIngreso') ?? $producto->fechaIngreso ?? ''}}"><br><br>
                         </div>
 
-                        <label for="existencia" class="col-sm-2 control-label">Cantidad en existencia</label>
+                        <label for="tipo" class="col-sm-2 control-label">Exposición al sol</label>
                         <div class="col-sm-10">  
-                            <input name="existencia" class="form-control" value="{{ old('existencia') ?? $producto->existencia ?? ''}}"><br><br>
+                            <select name="tipo_id" class="form-control">
+                                @foreach ($tipos as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         @if ($errors->any())

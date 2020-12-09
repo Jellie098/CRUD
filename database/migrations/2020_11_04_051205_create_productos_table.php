@@ -15,11 +15,11 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tipo_id')->constrained();
             $table->string('nombre');
             $table->string('especie')->nullable();
             $table->float('precio',7,2);
             $table->date('fechaIngreso');
-            $table->integer('existencia');
             $table->timestamps();
         });
     }
