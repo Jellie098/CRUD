@@ -115,11 +115,22 @@ class ProductoController extends Controller
         return redirect()->route('producto.index');
     }
 
-    public function deletes()
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Producto  $producto
+     * @return \Illuminate\Http\Response
+     */
+    public function eliminar(Producto $producto)
     {
-        $producto->onlyTrashed()->get();
-        return view('productos/productoShow', compact('producto'));
+        //
     }
+
+    //public function deletes()
+    //{
+        //$producto->onlyTrashed()->get();
+        //return view('productos/productoShow', compact('producto'));
+    //}
 
     //public function restore(Producto $producto)
     //{
