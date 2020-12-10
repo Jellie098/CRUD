@@ -79,7 +79,8 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        return view('productos/productoForm', compact('producto'));
+        $tipos = Tipo::all();
+        return view('productos/productoForm', compact('producto', 'tipos'));
     }
 
     /**
@@ -98,7 +99,7 @@ class ProductoController extends Controller
         ]);
 
         Producto::where('id', $producto->id)->update($request->except('_method', '_token'));
-
+        
         return redirect()->route('producto.show', [$producto]); 
     }
 
@@ -113,4 +114,18 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect()->route('producto.index');
     }
+
+    public function deletes()
+    {
+        $producto->onlyTrashed()->get();
+        return view('productos/productoShow', compact('producto'));
+    }
+
+    //public function restore(Producto $producto)
+    //{
+        //$producto = Producto::onlyTrashed()
+                //->where('id', $producto_id)
+                //->first();
+        //$producto->restore();
+    //}
 }

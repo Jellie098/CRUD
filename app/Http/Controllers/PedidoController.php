@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tipo;
+use App\Models\Pedido;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class TipoController extends Controller
+class PedidoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('administrador')->only('pedidosClientes');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $tipos = Tipo::get();
-        return view('tipos.tiposIndex', compact('tipos'));
+        $pedidos = Pedido::all();
+        return view('pedidos/pedidosIndex', compact('pedidos'));
     }
 
     /**
@@ -25,7 +32,9 @@ class TipoController extends Controller
      */
     public function create()
     {
-        //
+        $productos = Producto::all();
+
+        return view('pedidos/pedidoForm', compact('productos'));
     }
 
     /**
@@ -36,16 +45,19 @@ class TipoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pedido = Pedido::create($request->all());
+        $pedido->productos()->attach($request->producto_id);
+
+        return redirect('/pedido'); 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tipo  $tipo
+     * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show(Tipo $tipo)
+    public function show(Pedido $pedido)
     {
         //
     }
@@ -53,10 +65,10 @@ class TipoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tipo  $tipo
+     * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tipo $tipo)
+    public function edit(Pedido $pedido)
     {
         //
     }
@@ -65,10 +77,10 @@ class TipoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tipo  $tipo
+     * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tipo $tipo)
+    public function update(Request $request, Pedido $pedido)
     {
         //
     }
@@ -76,11 +88,16 @@ class TipoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tipo  $tipo
+     * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tipo $tipo)
+    public function destroy(Pedido $pedido)
     {
         //
+    }
+
+    public function pedidosClientes()
+    {
+        //Aquí se muestran los pedidos de todos los clientes
     }
 }

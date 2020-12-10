@@ -18,23 +18,27 @@
 
 <body class="gray-bg">
 
-<div >
-    <div class="gray-bg">
-        @include('layouts.barraSuperior')
-        @include('layouts.subMenu')
-        <div class="wrapper wrapper-content">
-            @yield('contenido')
+<div class="navbar navbar-static-top" role="navigation">
+    <div >
+        <div class="gray-bg">
+            @include('layouts.barraSuperior')
+            @include('layouts.subMenu')
+            <div class="wrapper wrapper-content">
+                @yield('contenido')
+            </div>
         </div>
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
-            </div>
+        <br>
+    </div>
+    <div class="footer">
+        <div class="pull-right">
+            <strong>Hola :)</strong>
+        </div>
+        <div>
+            Example Company &copy; 2020
         </div>
     </div>
 </div>
+
 
     <!-- Mainly scripts -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>

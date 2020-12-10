@@ -42,7 +42,7 @@
                         <div class="col-sm-10">  
                             <select name="tipo_id" class="form-control">
                                 @foreach ($tipos as $tipo)
-                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                    <option value="{{ $tipo->id }}" {{$tipo->id==$producto->tipo->id ? 'selected' : ''}}>{{ $tipo->tipo }}</option> 
                                 @endforeach
                             </select>
                         </div>
