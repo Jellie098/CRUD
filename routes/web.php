@@ -19,13 +19,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/inicio', function () {
+    return view('inicio');
+})->middleware(('auth'));
+
 //Listado de productos
 //Route::get('/producto', [ProductoController::class, 'index']);
 //Route::get('/producto/create', [ProductoController::class, 'create']);
 //Route::get('/producto/{producto}', [ProductoController::class, 'show']);
-Route::resource('producto',ProductoController::class)->middleware(['auth:sanctum']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('inicio');
+    return view('dashboard');
 })->name('dashboard');
-Route::resource('tipo',TipoController::class)->middleware(['auth:sanctum']);
-Route::resource('pedido',PedidoController::class)->middleware(['auth:sanctum']);
+
+Route::middleware('auth')->group(function(){
+    Route::resource('tipo',TipoController::class);
+    Route::resource('pedido',PedidoController::class);
+    Route::get('/producto/eliminados', [ProductoController::class, 'eliminados'])->name('producto.eliminados');
+    Route::put('/producto/restaurar/{producto}', [ProductoController::class, 'restaurar'])->name('producto.restaurar');
+    Route::resource('producto',ProductoController::class);
+});
+

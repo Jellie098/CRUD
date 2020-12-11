@@ -24,6 +24,7 @@
             @include('layouts.barraSuperior')
             @include('layouts.subMenu')
             <div class="wrapper wrapper-content">
+                @include('mensaje')
                 @yield('contenido')
             </div>
         </div>

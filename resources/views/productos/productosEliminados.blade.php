@@ -17,8 +17,15 @@
                         @foreach ($productos as $producto)
                             <tr>
                                 <td>{{$producto->id}}</td>
-                                <td><a href="/producto/{{$producto->id}}">{{$producto->nombre}}</a></td>
-                                <td>$ {{$producto->precio}}</td>
+                                <td>{{$producto->nombre}}</a></td>
+                                <td>{{$producto->precio}}</td>
+                                <td>
+                                    <form action="{{ route('producto.restaurar', [$producto->id]) }}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline btn-success">Restaurar</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
@@ -26,9 +33,7 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <a href="{{ route('producto.eliminar') }}" class="btn btn-outline btn-info"> Agregar producto </a>
-            <br><br>
-            <a href="{{ route('tipo.index') }}" class="btn btn-outline btn-info"> Filtrado de búsqueda </a>
+            <a href="{{ route('producto.index') }}" class="btn btn-outline btn-info"> Regresar a listado </a>
         </div>
     </div>
     </div>

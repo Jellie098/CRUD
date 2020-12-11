@@ -17,7 +17,7 @@
                         <div class="col-sm-10">  
                             <select name="producto_id[]" multiple class="form-control">
                                 @foreach ($productos as $producto)
-                                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                                    <option value="{{ $producto->id }}">{{ $producto->nombre }} $ {{ $producto->precio }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -28,7 +28,7 @@
                         </div>
 
                     </div>
-                    <a href="{{ route('producto.index') }}" class="btn btn-outline btn-default">Cancelar</a>
+                    <a href="/inicio" class="btn btn-outline btn-default">Cancelar</a>
                     <button type="submit" class="btn btn-outline btn-primary">Agregar</button>
                 </form>
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PedidoController extends Controller
 {
@@ -21,7 +23,7 @@ class PedidoController extends Controller
 
     public function index()
     {
-        $pedidos = Pedido::all();
+        $pedidos = Pedido::with('productos')->get();
         return view('pedidos/pedidosIndex', compact('pedidos'));
     }
 
@@ -32,9 +34,13 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        $productos = Producto::all();
+        if (Gate::allows('administrador')){
+            $productos = Producto::all();
 
-        return view('pedidos/pedidoForm', compact('productos'));
+            return view('pedidos/pedidoForm', compact('productos'));
+        } else{
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -45,10 +51,15 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['user_id'=>Auth::user()->id]);
         $pedido = Pedido::create($request->all());
         $pedido->productos()->attach($request->producto_id);
 
-        return redirect('/pedido'); 
+        return redirect('inicio')
+            ->with([
+                'mensaje' => 'Pedido creado con éxito',
+                'alert-type' => 'alert-success',
+            ]); 
     }
 
     /**
@@ -96,8 +107,14 @@ class PedidoController extends Controller
         //
     }
 
+   /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function pedidosClientes()
     {
-        //Aquí se muestran los pedidos de todos los clientes
+        $pedidos = Pedido::get();
+        return view('pedidos/pedidosClientes', compact('pedidos'));
     }
 }

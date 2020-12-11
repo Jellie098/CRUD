@@ -23,4 +23,19 @@ class Producto extends Model
     {
         return $this->belongsToMany(Pedido::class);
     }
+
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = ucfirst(strtolower($value));
+    }
+
+    public function getNombreAttribute($value)
+    {
+        return ucfirst(strtolower($value));
+    }
+
+    public function getPrecioAttribute($value)
+    {
+        return number_format($value, 2, ".", ",");
+    }
 }

@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Tipo;
 use App\Models\Producto;
+use App\Http\Middleware\Admin;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('administrador');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::get();
+        $productos = Producto::with('Tipo', 'pedidos')->get();
         return view('productos/productosIndex', compact('productos'));
     }
 
@@ -57,7 +63,11 @@ class ProductoController extends Controller
         Producto::create($request->all());
         //Adentro se puede poner cada atributo para guardarlo
 
-        return redirect('/producto');
+        return redirect('/producto')
+            ->with([
+                'mensaje' => 'Producto eliminado',
+                'alert-type' => 'alert-success',
+            ]); 
     }
 
     /**
@@ -100,7 +110,11 @@ class ProductoController extends Controller
 
         Producto::where('id', $producto->id)->update($request->except('_method', '_token'));
         
-        return redirect()->route('producto.show', [$producto]); 
+        return redirect()->route('producto.show', [$producto])
+            ->with([
+                'mensaje' => 'Producto actualizado',
+                'alert-type' => 'alert-warning',
+            ]);  
     }
 
     /**
@@ -112,31 +126,39 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        return redirect()->route('producto.index');
+        return redirect()->route('producto.index')
+            ->with([
+                'mensaje' => 'Producto eliminado',
+                'alert-type' => 'alert-danger',
+            ]); 
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Producto  $producto
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function eliminar(Producto $producto)
+    public function eliminados()
     {
-        //
+        $productos = Producto::onlyTrashed()->get();
+        return view('productos/productosEliminados', compact('productos'));
     }
 
-    //public function deletes()
-    //{
-        //$producto->onlyTrashed()->get();
-        //return view('productos/productoShow', compact('producto'));
-    //}
-
-    //public function restore(Producto $producto)
-    //{
-        //$producto = Producto::onlyTrashed()
-                //->where('id', $producto_id)
-                //->first();
-        //$producto->restore();
-    //}
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function restaurar($producto_id)
+    {
+        $producto = Producto::onlyTrashed()
+                ->where('id', $producto_id)
+                ->first();
+        $producto->restore();
+        return redirect()->route('producto.index')
+        ->with([
+            'mensaje' => 'Producto restaurado',
+            'alert-type' => 'alert-success',
+        ]); 
+    }
 }

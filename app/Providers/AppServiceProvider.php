@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+//use Faker\Generator;
+//$faker->productName;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //$faker = $this->app->make(Generator::class);
+        //$faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
     }
 }

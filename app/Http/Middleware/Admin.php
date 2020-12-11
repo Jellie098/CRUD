@@ -17,8 +17,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->tipo != 'administrador') {
-            return redirect('/dashboard');
+        if (\Auth::user()->tipo != 'administrador') {
+            return redirect('/dashboard')
+                ->with([
+                    'mensaje' => 'No tiene acceso a esta sección',
+                    'alert-type' => 'alert-danger',
+                ]);
         }
         return $next($request);
     }

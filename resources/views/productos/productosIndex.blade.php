@@ -26,10 +26,15 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <a href="{{ route('producto.eliminar') }}" class="btn btn-outline btn-info"> Agregar producto </a>
+            <a href="{{ route('producto.create') }}" class="btn btn-outline btn-info"> Agregar producto </a>
             <br><br>
             <a href="{{ route('tipo.index') }}" class="btn btn-outline btn-info"> Filtrado de búsqueda </a>
             <br><br>
+            <a href="{{ route('producto.eliminados') }}" class="btn btn-outline btn-info"> Productos eliminados </a>
+            <br><br>
+            <a href="{{ route('pedido.index') }}" class="btn btn-outline btn-info"> Listar pedidos </a>
+            <br><br>
+            <a href="{{ route('dashboard') }}" class="btn btn-outline btn-info"> Ir a Dashboard </a>
         </div>
     </div>
     </div>

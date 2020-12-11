@@ -10,28 +10,20 @@
                             <tr>
                                 <th>ID</th>
                                 <th>ID de usuario</th>
-                                <th>Productos</th>
-                                <th>Extras</th>
-                                <th>Total</th>
+                                <th>Precio</th>
                             </tr>
                         </thead>
                         @foreach ($pedidos as $pedido)
                             <tr>
                                 <td>{{$pedido->id}}</td>
                                 <td>{{$pedido->user_id}}</td>
-                                <td>
-                                    @foreach($pedido->productos as $producto)
-                                        {{$producto->nombre}}<br>
-                                    @endforeach
-                                </td>
-                                <td>{{$pedido->extra}}</td>
-                                <td>$ {{$pedido->total}}</td>
+                                <td>{{$pedido->producto->nombre}}</td>
+                                <td>{{$pedido->total}}</td>
                             </tr>
                         @endforeach
                     </table>
                 </div>       
             </div>
         </div>
-        <a href="{{ route('producto.index') }}" class="btn btn-outline btn-success">Volver a listado</a>
     </div>
 @endsection

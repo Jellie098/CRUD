@@ -8,6 +8,15 @@
                 <h3>Agregar un nuevo producto</h3>
             </div>    
             <div class="ibox-content">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                    @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if(isset($producto))
                     <form action="{{ route('producto.update', [$producto]) }}" method="POST">
                     @method('patch')
@@ -42,25 +51,16 @@
                         <div class="col-sm-10">  
                             <select name="tipo_id" class="form-control">
                                 @foreach ($tipos as $tipo)
-                                    <option value="{{ $tipo->id }}" >{{ $tipo->tipo }}</option> 
+                                    <option value="{{ $tipo->id }}" {{isset($producto) && $tipo->id==$producto->tipo->id ? 'selected' : ''}}>{{ $tipo->tipo }}</option> 
                                     {{--{{$tipo->id==$producto->tipo->id ? 'selected' : ''}}--}}
                                 @endforeach
                             </select>
                         </div>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                     </div>
                     <a href="{{ route('producto.index') }}" class="btn btn-outline btn-default">Cancelar</a>
                     <button type="submit" class="btn btn-outline btn-primary">Agregar</button>
+                    
                 </form>
 
             </div>
